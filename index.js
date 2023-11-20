@@ -1,24 +1,33 @@
 import express from 'express'
-import mongoose from 'mongoose'
+import mongoConnect from './db/database.js'
 import route from './routes/route.js'
+import mongoose from 'mongoose'
+import main from './db/database.js'
 
 const app=express()
 const port=3000
 
-const mongoConnect=async()=>{
-    try{
-        mongoose.connect("mongodb://localhost:27017/user")
-        console.log("DB Connection Successs!")
 
-        
-    }
-    catch(error){
-        console.log(error)
-    }
-};
+// const db =
+//   "mongodb://localhost:27017/user";
 
-app.use(route)
+// console.log(db);
+// mongoose
+//   .connect(db)
+//   .then(() => {
+//     console.log("connection successful");
+//   })
+//   .catch((err) => console.log(err))
+//   app.use(express.json());
+
+const TestSchema=new mongoose.Schema({
+  name:String,
+  age:Number
+})
+
+
+app.use(main)
+// app.use(route)
 app.listen(port,()=>{
     console.log(`http://localhost:${port}/`)
 })
-export default mongoConnect
